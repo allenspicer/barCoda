@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UIView * previewView;
 @property (nonatomic, strong) AVCaptureSession* session;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
 
 
 @end
@@ -20,12 +21,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.session = [[AVCaptureSession alloc]init];
+    self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
+    self.previewView = [[UIView alloc]initWithFrame:CGRectMake(20, 20, self.view.bounds.size.width*0.9, self.view.bounds.size.height*0.9)];
+    [self.view addSubview:self.previewView];
+    [self.previewView.layer addSublayer:self.previewLayer];
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
